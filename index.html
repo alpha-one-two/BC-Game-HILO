@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/sha256.min.js"></script>
+    <script type="text/javascript" src="js/sha512.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/normalize.min.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 50px;
+        }
+        div{
+            margin-top: 10px;
+        }
+        .button{
+            padding: 10px;
+            display: block;
+            margin:10px 0 10px 0;
+            border: solid 1px #ccc;
+            outline:none;
+        }
+        .button:active{
+            background: #fff;
+        }
+        .label{
+            min-width: 120px;
+            display: inline-block;
+        }
+        .long{
+            height: 33px;
+            width: 600px;
+        }
+        .short{
+            height: 33px;
+            width: 200px;
+        }
+        .description{
+            color: #656565;;
+            padding: 5px;
+            display: block;
+        }
+        .divideEqually{
+            width: 600px;
+            display: inline-block;
+        }
+        .redText{
+            color: #f00;
+        }
+        </style>
+    <title>Verification of HILO</title>
+</head>
+
+<body>
+    <form>
+        <div>
+            <span class="label">Server Seed</span>
+            <input id="serverSeed" class="long" type="text" value="f1137a5f55385c3241e08202335fc0c3d641cde0b35f0e54d2b0a2fe7005a48b" />
+        </div>
+        <div>
+            <span class="label">Client Seed</span>
+            <input id="clientSeed" class="long" type="text" value="4d8c79b149bd18b629525f72c0e27d0b" />
+        </div>
+        <div>
+            <span class="label">Nonce</span>
+            <input id="nonce" class="short" type="text" value="10" />
+        </div>
+    </form>
+    <div>
+        <h1>Validation results</h1>
+        <div id="placeholder1">
+        </div>
+        <div id="placeholder2">
+            <input type="button" value="Show the next 5 cards" class="button" onclick="runLoop()">
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+$('form').keyup(getResult).keyup();
+</script>
