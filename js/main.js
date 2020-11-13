@@ -45,7 +45,7 @@ function drawCard(parent) {
     ctx.font = descriptionFontSize + "px sans-serif";
     ctx.fillStyle = descriptionFontColor;
     var x = 10;
-    drawWrapText(ctx, "Use SHA256 to calculate the hash value after combining Server Seed, Client Seed, Nonce and Round.  Sha256(Server_Seed:Client_Seed:Nonce:Round)", x, canvasWidth, lineHeight * 3, null, "  ");
+    drawWrapText(ctx, "Use HMAC_SHA256 to calculate the hash value after combining Client Seed, Nonce and Round,  And use Server Seed as the key.  HMAC_Sha256 ( Client_Seed : Nonce : Round , Server_Seed )", x, 700, lineHeight * 3, null, "  ");
     drawWrapText(ctx, "Take out the first 8 characters of the hash, and divide every 2 characters", x, 150, lineHeight * 6);
     drawWrapText(ctx, "Convert  hexadecimal  to decimal", 160, 250, lineHeight * 7.6, null, "  ");
     drawWrapText(ctx, "Separate calculation", 290, canvasWidth, lineHeight * 8.8);
@@ -53,7 +53,8 @@ function drawCard(parent) {
 
     ctx.font = "bold 24px sans-serif";
     ctx.fillStyle = "#000";
-    var hash = sha256(serverSeed + ":" + clientSeed + ":" + nonce + ":" + round);
+    var hash = CryptoJS.HmacSHA256(clientSeed+":"+nonce+":"+round, serverSeed).toString();
+    //var hash = sha256(serverSeed + ":" + clientSeed + ":" + nonce + ":" + round);
     var firstEightChar = hash.substr(0, 8);
     drawWrapText(ctx, "Card " + (round + 1), x, canvasWidth, lineHeight * 1);
     ctx.font = fontSize + "px sans-serif";
